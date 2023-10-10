@@ -27,11 +27,13 @@ jobs:
     - name: Deploy to GitHub Pages
       run: |
         # Default GitHub Pages deployment task
+        git config user.email ""
+        git config user.name "$Custom Deployment"
         git fetch --prune --unshallow
         git checkout main
         git clean -ffdx
         git pull
         git checkout HEAD -- .
         git add -A
-        git commit -m "GitHub Pages deployment"
+        git commit -m "$GitHub Pages deployment"
         git push
