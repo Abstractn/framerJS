@@ -3,7 +3,7 @@ name: Custom Deployment
 on:
   push:
     branches:
-      - main
+      - deploy
 
 jobs:
   build:
@@ -21,19 +21,37 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run npm build
-      run: npm run build
-
-    - name: Deploy to GitHub Pages
+    - name: Set credentials
       run: |
-        # Default GitHub Pages deployment task
         git config user.email ""
         git config user.name "$Custom Deployment"
-        git fetch --prune --unshallow
-        git checkout main
-        git clean -ffdx
-        git pull
+
+    - name: Generate build
+      run: |
+        git checkout deploy
         git checkout HEAD -- .
-        git add -A
-        git commit -m "$GitHub Pages deployment"
+        git pull
+        npm run build
+        git add .
+        git commit -m "$Generated Vite build"
         git push
+        git checkout main
+        git checkout HEAD -- .
+
+    - name: Update main branch
+      run: |
+        git pull origin deploy
+      continue-on-error: true
+
+    - name: Verify merge conflict
+      run: |
+        if git diff --name-only --diff-filter=U | grep -q .; then
+          echo "CONFLICTS DETECTED! Please resolve conflicts by manually pulling 'main' into 'deploy' or any other way."
+          exit 1
+        fi
+
+    - name: Push to main
+      run: |
+        if [ ${{ steps["Update main branch"].outcome }} == "success" ]; then
+          git push
+        fi
