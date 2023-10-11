@@ -1,0 +1,33 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - deploy
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+
+    - name: Build
+      run: |
+        echo "--- npm install"
+        npm install
+        echo "--- npm run build"
+        npm run build
+        echo "--- git status"
+        git status
+        echo "--- git add ."
+        git add .
+        echo "--- git restore ."
+        git restore .
+        echo "--- git checkout ."
+        git checkout .
