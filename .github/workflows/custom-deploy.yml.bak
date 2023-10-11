@@ -3,7 +3,7 @@ name: Custom Deployment
 on:
   push:
     branches:
-      - deploy2
+      - deploy
 
 jobs:
   build:
