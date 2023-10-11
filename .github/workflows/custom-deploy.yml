@@ -11,22 +11,27 @@ jobs:
 
     steps:
     - name: Checkout code
+      id: autoCheckout
       uses: actions/checkout@v2
 
     - name: Set up Node.js
+      id: autoNode
       uses: actions/setup-node@v2
       with:
         node-version: 14
 
     - name: Install dependencies
+      id: npmInstall
       run: npm install
 
     - name: Set credentials
+      id: credentials
       run: |
         git config user.email ""
         git config user.name "$Custom Deployment"
 
     - name: Generate build
+      id: build
       run: |
         git checkout deploy
         git checkout HEAD -- .
@@ -39,11 +44,13 @@ jobs:
         git checkout HEAD -- .
 
     - name: Update main branch
+      id: branchMerge
       run: |
         git pull origin deploy
       continue-on-error: true
 
     - name: Verify merge conflict
+      id: verifyMerge
       run: |
         if git diff --name-only --diff-filter=U | grep -q .; then
           echo "CONFLICTS DETECTED! Please resolve conflicts by manually pulling 'main' into 'deploy' or any other way."
@@ -51,7 +58,8 @@ jobs:
         fi
 
     - name: Push to main
+      id: pushToMain
       run: |
-        if [ ${{ steps["Update main branch"].outcome }} == "success" ]; then
+        if [ ${{ steps.branchMerge.outcome }} == "success" ]; then
           git push
         fi
