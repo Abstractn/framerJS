@@ -27,7 +27,11 @@ jobs:
         git status
         echo "--- git add ."
         git add .
+        echo "--- git status"
+        git status
         echo "--- git restore ."
         git restore .
+        echo "--- git status"
+        git status
         echo "--- git checkout ."
         git checkout .
