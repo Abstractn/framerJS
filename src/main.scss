@@ -1,8 +1,8 @@
+@import './styles/variables.scss';
+@import './styles/mixins.scss';
+@import './styles/reset.scss';
+@import './styles/common.scss';
 @import './components/page/page.component.scss';
 @import './components/canvas-printer/canvas-printer.component.scss';
 @import './components/gradient-generator/gradient-generator.component.scss';
 @import './components/color-picker/color-picker.component.scss';
-
-body {
-  background-color: #333;
-}

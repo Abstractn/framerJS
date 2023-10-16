@@ -1,0 +1,95 @@
+body {
+  background-image: url(https://abstractn.github.io/res/imgs/bg/abs_bg-blur.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+  /*@include breakpoint(tab-down) {
+    background-size: 150%;
+  }*/
+  
+  @include breakpoint(mob-down) {
+    background-size: cover;
+  }
+}
+
+main {
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.hr-mid {
+  border: 0;
+  width: 100%;
+  height: 2px;
+  background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.75), rgba(255,255,255,0));
+
+  &-spaced {
+    margin: 20px 0px;
+  }
+}
+
+.bg-dawn  { background: linear-gradient(123deg, rgba(173, 78,150,1) 0%, rgba(157,119, 33,1) 100%); }
+.bg-noon  { background: linear-gradient(123deg, rgba(103,153, 90,1) 0%, rgba( 39,125,100,1) 100%); }
+.bg-after { background: linear-gradient(123deg, rgba( 85, 81,185,1) 0%, rgba(230,115, 71,1) 100%); }
+.bg-night { background: linear-gradient(123deg, rgba( 99, 73,148,1) 0%, rgba( 13, 17, 62,1) 100%); }
+
+.card {
+  //TODO vars
+  &:not(.no-pad) {
+    padding: 15px 20px;
+  }
+  
+  &:not(.no-round) {
+    border-radius: 10px;
+  }
+
+  &-shadow {
+    box-shadow: 0px 0px 10px -3px black;
+  }
+}
+
+.glass {
+  background-color: rgba(0, 0, 0, .5);
+  
+  @supports (backdrop-filter: blur(5px)) {
+    backdrop-filter: blur(10px);
+    background-color: transparent;
+  }
+  
+  &-tinted {
+    background-color: rgba(0, 0, 0, .2);
+  }
+
+  &-opaque {
+    backdrop-filter: blur(100px);
+  }
+
+  &-shadow {
+    box-shadow: 0px 0px 10px -5px black;
+  }
+}
+
+.checkboard-background {
+  background: #eee;
+  background-image: linear-gradient(45deg, rgba(0,0,0,.25) 25%,
+                    transparent 0, transparent 75%, rgba(0,0,0,.25) 0),
+                    linear-gradient(45deg, rgba(0,0,0,.25) 25%,
+                    transparent 0, transparent 75%, rgba(0,0,0,.25) 0);
+  background-position: 0 0, 25px 25px;
+  background-size: 50px 50px;
+  
+  &-light {
+    background: rgba(255, 255, 255, .1);
+    background-image: linear-gradient(45deg, rgba(0,0,0,.25) 25%,
+                      transparent 0, transparent 75%, rgba(0,0,0,.25) 0),
+                      linear-gradient(45deg, rgba(0,0,0,.25) 25%,
+                      transparent 0, transparent 75%, rgba(0,0,0,.25) 0);
+    background-position: 0 0, 25px 25px;
+    background-size: 50px 50px;
+  }
+}
+
+.template {
+  display: none;
+}
