@@ -1,5 +1,5 @@
 import { AbsComponent } from '../../../../main/lib/abs-component';
-import { proportionalRange, rgbToHex } from '../../general/utils';
+import { proportionalRange, rgbToHex } from '../../libs/abs-utils';
 
 export class ColorPickerComponent implements AbsComponent {
   constructor(public readonly node: HTMLElement) {}

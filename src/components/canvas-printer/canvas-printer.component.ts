@@ -1,7 +1,8 @@
 import { AbsComponent } from '../../../../main/lib/abs-component';
 import { DEFAULT_GRADIENT, GRADIENT_CHANGE_EVENT_NAME } from '../../general/consts';
 import { Gradient, ProfilePictureFrame } from '../../general/interfaces';
-import { drawFrame, proportionalRange } from '../../general/utils';
+import { drawFrame } from '../../general/utils';
+import { proportionalRange } from '../../libs/abs-utils';
 import { GradientGeneratorComponent } from '../gradient-generator/gradient-generator.component';
 
 export class CanvasPrinterComponent implements AbsComponent {

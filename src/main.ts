@@ -1,6 +1,6 @@
 import './main.scss';
 
-import { AbsComponentManager } from '../../main/lib/abs-component';
+import { AbsComponentManager } from './libs/abs-component';
 
 import { GradientGeneratorComponent } from './components/gradient-generator/gradient-generator.component';
 import { CanvasPrinterComponent } from './components/canvas-printer/canvas-printer.component';

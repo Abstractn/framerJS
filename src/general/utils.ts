@@ -1,26 +1,8 @@
+import { proportionalRange } from "../libs/abs-utils";
 import { Gradient } from "./interfaces";
-
-export function proportionalRange(
-  oldMin: number, oldMax: number,
-  newMin: number, newMax: number,
-  value: number
-): number {
-  return ((newMax - newMin) / (oldMax - oldMin)) * (value - oldMin) + newMin;
-}
 
 export function degreesToRadians(degrees: number): number {
   return degrees * (Math.PI / 180);
-}
-
-export function rgbToHex(r: number, g: number, b: number): string|undefined {
-  const isRedWithinRange   = r > -1 && r < 256;
-  const isGreenWithinRange = g > -1 && g < 256;
-  const isBlueWithinRange  = b > -1 && b < 256;
-  if(isRedWithinRange && isGreenWithinRange && isBlueWithinRange) {
-    return ((r << 16) | (g << 8) | b).toString(16).toUpperCase();
-  } else {
-    return undefined;
-  }
 }
 
 export function drawFrame(frameSizePercentage: number, gradientData: Gradient) {
