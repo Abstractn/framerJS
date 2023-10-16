@@ -1,0 +1,207 @@
+.unsupported-device-warning {
+  box-sizing: border-box;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  //@extend .glass;
+  font-family: "Rounded Elegance";
+  text-shadow: 0px 0px 3px black;
+  padding: 50px;
+  z-index: 999;
+  
+  background-image: url(https://abstractn.github.io/res/imgs/bg/abs_bg-blur.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  
+  &.hidden {
+    display: none !important;
+  }
+  
+  h2 {
+    margin: 0;
+  }
+  
+  .fa-icon {
+    display: inline-block;
+    font-size: 30px;
+    margin-right: 20px;
+  }
+}
+
+.main-view {
+  display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+  @include breakpoint(mob-down) {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+.splash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: #CCC;
+  background: rgb(74,42,96);
+  background: linear-gradient(90deg, rgba(74,42,96,1) 0%, rgba(48,93,121,1) 100%);
+  //background: linear-gradient(-20deg, rgba(0,0,0,1) 0%, rgba(50,13,13,1) 50%, rgba(221,38,77,1) 100%); // wine
+  opacity: 1;
+  transition: opacity .7s;
+  
+  &.closed {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  &-hidden {
+    display: none;
+  }
+  
+  &-header {
+    margin-bottom: 50px;
+    
+    &-title {
+      font-size: 56px;
+      font-family: 'Rounded Elegance';
+      padding: 0;
+      margin: 0;
+      letter-spacing: 3px;
+      //text-shadow: -1px -1px 0px red, -1px 1px 0px green, 1px 1px 0px blue, 1px -1px 0px yellow;
+      text-shadow: 0px 0px 3px black;
+    }
+    &-subtitle {
+      font-family: 'Futura', 'Arial';
+      font-weight: normal;
+    }
+  }
+  &-body {
+    &-actions {
+      @include breakpoint('mob-down') {
+        flex-direction: column;
+      }
+    }
+  }
+  
+  &-view {
+    &-guide {
+      $transition-duration: .7s;
+      
+      //display: flex;
+        //justify-content: center;
+        //align-items: center;
+      position: absolute;
+        top: 50%;
+        left: calc(50% + 100px);
+        transform: translate(-50%, -50%);
+      width: 500px;
+      height: 40%;
+      //background-color: transparent;
+      //background-color: rgba(0, 0, 0, 0.5);
+      //border-radius: 10px;
+      padding: 0 50px;
+      //backdrop-filter: blur(10px); //TODO global var?
+      overflow-y: auto;
+      overflow-x: hidden;
+      pointer-events: none;
+      opacity: 0;
+      transition: left $transition-duration, opacity $transition-duration;
+      
+      //TODO if "pointer-events: auto" doesn't work, use this
+      //&:not(.visible) { pointer-events: none; }
+      
+      @include breakpoint(tab-down) {
+        width: 300px;
+        height: 200px;
+      }
+      
+      @include breakpoint(mob-down) {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+      }
+      
+      &.visible {
+        pointer-events: auto;
+        opacity: 1;
+        left: 50%;
+      }
+      
+      &-content {
+        box-sizing: border-box;
+        padding: 30px 0;
+        width: 100%;
+        //box-shadow: 0px 0px 10px -3px black; //TODO global var?
+      }
+    }
+  }
+  
+  &-button {
+    font-size: 20px;
+    width: 140px;
+    height: 50px;
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color .3s;
+    border-radius: 8px;
+    
+    //color: white;
+    //background-color: transparent;
+    //border: solid white 2px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    box-shadow: 0px 5px 5px 1px rgba(0, 0, 0, 0.25);
+    
+    @include breakpoint('tab-up') {
+      &:hover {
+        //color: black;
+        //background-color: white;
+      }
+
+      &:active {
+        transition: none !important;
+        //background-color: gray;
+        background-color: rgba(255, 255, 255, .25);
+      }
+    }
+    
+    @include breakpoint('tab-down') {
+      &:active {
+        //color: black;
+        //background-color: white;
+        transition: none !important;
+        background-color: rgba(255, 255, 255, .25);
+      }
+    }
+  }
+}
+
+.footer {
+  margin: 40px 0 15px 0;
+  width: 100vw;
+  
+  @include breakpoint(mob-down) {
+    margin: 15px 0 15px 0;
+  }
+  
+  &-info-text {
+    text-align: center;
+    font-family: monospace;
+    color: gray;
+    font-size: 10px;
+    padding: 0 25px;
+  }
+}
