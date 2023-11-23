@@ -1,4 +1,4 @@
-import { AbsComponent } from '../../../../main/lib/abs-component';
+import { AbsComponent } from 'abs-component';
 import { DEFAULT_GRADIENT, GRADIENT_CHANGE_EVENT_NAME, PROFILE_PICTURE_FRAME_INTERFACE_INIT } from '../../general/consts';
 import { ProfilePictureFrame, Step } from '../../general/interfaces';
 

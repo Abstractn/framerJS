@@ -1,4 +1,4 @@
-import { proportionalRange } from "../libs/abs-utils";
+import { proportionalRange } from "abs-utilities";
 import { Gradient } from "./interfaces";
 
 export function degreesToRadians(degrees: number): number {

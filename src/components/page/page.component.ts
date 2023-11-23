@@ -1,4 +1,4 @@
-import { AbsComponent } from '../../../../main/lib/abs-component';
+import { AbsComponent } from 'abs-component';
 
 export class PageComponent implements AbsComponent {
   constructor(public readonly node: HTMLElement) {}
