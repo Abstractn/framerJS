@@ -16,10 +16,124 @@
     <link rel="icon" type="image/svg+xml" href="https://abstractn.github.io/abs.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FramerJS</title>
-    <script type="module" crossorigin src="/framerJS/dist/assets/index-a7ddbd9d.js"></script>
+    <script src="https://kit.fontawesome.com/e97eac13ba.js" crossorigin="anonymous"></script>
+    <script type="module" crossorigin src="/framerJS/dist/assets/index-66573754.js"></script>
     <link rel="stylesheet" href="/framerJS/dist/assets/index-594abb36.css">
   </head>
   <body>
+    <main class="flex center col extend autocenter" data-abs-component="PageComponent">
+      <div class="unsupported-device-warning hidden">
+        <i class="fa-icon fa-solid fa-ban"></i>
+        <h2>Sorry, this device is not supported.</h2>
+      </div>
+      
+      <div class="splash flex center col">
+        <div class="splash-header flex col">
+          <h1 class="splash-header-title">FramerJS</h1>
+          <span class="splash-header-subtitle">by Abstractn</span>
+        </div>
+        <div class="splash-body flex">
+          <div class="splash-body-actions flex">
+            <button class="splash-button splash-button-start">Start</button>
+            <!-- <button class="splash-button splash-button-help">Guide</button> -->
+          </div>
+          <!-- <div class="splash-view splash-view-guide card card-glass card-shadow">
+            <div class="splash-view-guide-content">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+      
+      <div class="main-view">
+        <div class="canvas-printer" data-abs-component="CanvasPrinterComponent">
+          <div class="canvas-printer-image-input-wrapper">
+            <label class="canvas-printer-image-input-label" for="image-uploader">Load image</label>
+            <input id="image-uploader" type="file" class="canvas-printer-image-input">
+          </div>
+          <img class="canvas-printer-image-preview hidden">
+          <div class="canvas-printer-canvas-wrapper">
+            <div class="canvas-printer-canvas canvas-printer-canvas-placeholder"></div>
+          </div>
+        </div>
+      
+        <div class="gradient-generator disabled" data-abs-component="GradientGeneratorComponent">
+          <div class="gradient-generator-header">
+            <div class="gradient-generator-header-title">Gradient generator</div>
+            <div class="gradient-generator-header-buttons">
+              <button class="gradient-generator-control gradient-generator-control-import square-button" title="import">
+                <i class="fa-icon fa-solid fa-file-import"></i>
+              </button>
+              <button class="gradient-generator-control gradient-generator-control-export square-button" title="export">
+                <i class="fa-icon fa-solid fa-floppy-disk"></i>
+              </button>
+            </div>
+          </div>
+          <hr class="hr-mid">
+          <div class="gradient-generator-body">
+            <div class="gradient-generator-form">
+              <div class="gradient-generator-frame-options">
+                <div class="gradient-generator-frame-size" title="frame size">
+                  <span class="gradient-generator-frame-size-title">size</span>
+                  <input type="number" class="gradient-generator-frame-size-input" min="0" value="10">
+                </div>
+                <div class="gradient-generator-frame-angle" title="gradient angle">
+                  <span class="gradient-generator-frame-angle-title">angle</span>
+                  <input type="number" class="gradient-generator-frame-angle-input" min="-360" max="360" value="15">°
+                </div>
+              </div>
+              <ul class="gradient-generator-step-list"></ul>
+              <button class="gradient-generator-control gradient-generator-control-add square-button" title="add step">+</button>
+            </div>
+            <div class="gradient-generator-view gradient-generator-view-import not-visible glass">
+              <div class="gradient-generator-view-header">
+                <button class="gradient-generator-view-close gradient-generator-view-import-close square-button">
+                  <i class="fa-icon fa-solid fa-x"></i>
+                </button>
+                <button class="gradient-generator-view-title gradient-generator-view-import-action square-button">import</button>
+              </div>
+              <textarea class="gradient-generator-view-input gradient-generator-view-import-input" placeholder="insert code here"></textarea>
+            </div>
+            <div class="gradient-generator-view gradient-generator-view-export not-visible glass">
+              <div class="gradient-generator-view-header">
+                <button class="gradient-generator-view-close gradient-generator-view-export-close square-button">
+                  <i class="fa-icon fa-solid fa-x"></i>
+                </button>
+                <span class="gradient-generator-view-title gradient-generator-view-export-title">export</span>
+              </div>
+              <textarea class="gradient-generator-view-input gradient-generator-view-export-input"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer">
+        <div class="footer-info-text">
+        </div>
+      </div>
+    </main>
+    
+    <div id="step-item-template" class="template">
+      <li class="gradient-generator-step-list-item">
+        <div class="gradient-generator-step-color">
+          <span class="gradient-generator-step-color-preview" style="background-color:#000000" title="color preview"></span>
+          <div class="gradient-generator-step-color-hex" title="color code (hex)">
+            #
+            <input type="text" class="gradient-generator-step-color-hex-input" placeholder="rrggbb" maxlength="6">
+          </div>
+        </div>
+        <div class="gradient-generator-step-position" title="step position (0-100)">
+          <input type="number" class="gradient-generator-step-position-input" min="0" max="100" placeholder="##">
+          %
+        </div>
+        <div class="gradient-generator-step-controls">
+          <button class="gradient-generator-step-control gradient-generator-step-control-delete square-button" title="delete step">
+            <i class="fa-icon fas fa-trash"></i>
+          </button>
+        </div>
+      </li>
+    </div>
   </body>
   
 </html>
