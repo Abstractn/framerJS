@@ -25,7 +25,23 @@ export function drawFrame(frameSizePercentage: number, gradientData: Gradient) {
   const endGradientY   = Math.floor( proportionalRange(-1, 1, 0, canvasSize, Math.cos( degreesToRadians(fixedGradientAngle + 180) ) ) );
   
   const frameGradient = ctx.createLinearGradient(startGradientX, startGradientY, endGradientX, endGradientY);
-  gradientData.steps?.forEach(gradientStep => frameGradient.addColorStop((gradientStep.position || 0) / 100, '#' + (gradientStep?.colorCode || '000000' )));
+  gradientData.steps?.forEach(gradientStep => {
+    try {
+      frameGradient.addColorStop(
+        (gradientStep.position || 0) / 100,
+        `#${gradientStep?.colorCode || '000000'}`
+      );
+    } catch (error: any) {
+      if( (error.message as string|undefined)?.includes('Invalid color') ) {
+        frameGradient.addColorStop(
+          (gradientStep.position || 0) / 100,
+          '#000000'
+        );
+      } else {
+        console.error(error);
+      }
+    }
+  });
   
   ctx.strokeStyle = frameGradient;
 
