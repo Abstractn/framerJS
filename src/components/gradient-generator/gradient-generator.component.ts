@@ -1,6 +1,6 @@
 import { AbsComponent } from 'abs-component';
 import { DEFAULT_GRADIENT, GRADIENT_CHANGE_EVENT_NAME, PROFILE_PICTURE_FRAME_INTERFACE_INIT } from '../../general/consts';
-import { ProfilePictureFrame, Step } from '../../general/interfaces';
+import { Gradient, GradientChangeEvent, ProfilePictureFrame, Step } from '../../general/interfaces';
 
 export class GradientGeneratorComponent implements AbsComponent {
   constructor(public readonly node: HTMLElement) {}
@@ -40,7 +40,7 @@ export class GradientGeneratorComponent implements AbsComponent {
 
   init() {}
 
-  ready() {
+  customInit() {
     if(!this.isComponentInited) {
       this.isComponentInited = !this.isComponentInited;
 
@@ -256,14 +256,12 @@ export class GradientGeneratorComponent implements AbsComponent {
 
   updateOutput(): void {
     this.output = PROFILE_PICTURE_FRAME_INTERFACE_INIT;
-    //@ts-ignore
-    this.output.gradient.steps = [];
+    (this.output.gradient as Gradient).steps = [];
     this.templateSteps.forEach((step, i) => {
       const colorCode = (step.querySelector(this.STEP_COLOR_INPUT_SELECTOR) as HTMLInputElement).value;
       const stepPosition = parseInt((step.querySelector(this.STEP_POSITION_INPUT_SELECTOR) as HTMLInputElement).value);
       if(colorCode && (stepPosition >= 0 && stepPosition <= 100)) {
-        //@ts-ignore
-        this.output.gradient.steps.push({
+        ((this.output.gradient as Gradient).steps as Step[]).push({
           colorCode: colorCode,
           position: stepPosition
         });
@@ -275,8 +273,7 @@ export class GradientGeneratorComponent implements AbsComponent {
     if(this.output.gradient) {
       this.output.gradient.angle = parseInt(gradientAngleInputNode.value);
     }
-    //@ts-ignore
-    this.output.gradient.steps.sort( (a: Step, b: Step) => ((a.position+1 || 9999) - (b.position+1 || 9999)) );
+    ((this.output.gradient as Gradient).steps as Step[]).sort( (a: Step, b: Step) => ((a.position as number + 1 || 9999) - (b.position as number + 1 || 9999)) );
     localStorage.setItem(this.LAST_GRADIENT_DATA_STORAGE_KEY, JSON.stringify(this.output));
     this.updateExport();
     this.triggerOutput();
@@ -305,13 +302,13 @@ export class GradientGeneratorComponent implements AbsComponent {
   }
 
   triggerOutput() {
-    this.onChange = new CustomEvent('gradientchange', {
+    this.onChange = new CustomEvent(GRADIENT_CHANGE_EVENT_NAME, {
       detail: {
         profilePictureData: this.output
       },
       bubbles: true,
       cancelable: true
-    });
+    }) as CustomEvent<GradientChangeEvent>;
     document.dispatchEvent(this.onChange);
   }
 }

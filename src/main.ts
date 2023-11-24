@@ -7,7 +7,8 @@ import { CanvasPrinterComponent } from './components/canvas-printer/canvas-print
 import { ColorPickerComponent } from './components/color-picker/color-picker.component';
 import { PageComponent } from './components/page/page.component';
 
-const absComponentManager = new AbsComponentManager();
+export const absComponentManager = new AbsComponentManager();
+
 [
   GradientGeneratorComponent,
   CanvasPrinterComponent,
@@ -19,3 +20,4 @@ const absComponentManager = new AbsComponentManager();
     Component
   );
 });
+absComponentManager.initComponents();

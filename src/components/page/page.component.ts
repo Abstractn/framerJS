@@ -1,4 +1,5 @@
 import { AbsComponent } from 'abs-component';
+import Bowser from 'bowser';
 
 export class PageComponent implements AbsComponent {
   constructor(public readonly node: HTMLElement) {}
@@ -26,8 +27,8 @@ export class PageComponent implements AbsComponent {
     const splashNode = document.querySelector(this.SPLASH_SCREEN_NODE_SELECTOR) as HTMLElement;
     const startButtonNode = splashNode.querySelector(this.START_BUTTON_SELECTOR) as HTMLElement;
     const guideButtonNode = splashNode.querySelector(this.GUIDE_BUTTON_SELECTOR) as HTMLElement;
-    startButtonNode.addEventListener('click', () => { this.hideSplashScreen(); });
-    guideButtonNode.addEventListener('click', () => { this.showGuideView(); });
+    startButtonNode?.addEventListener('click', () => { this.hideSplashScreen(); });
+    guideButtonNode?.addEventListener('click', () => { this.showGuideView(); });
   }
   
   hideSplashScreen(): void {
@@ -65,9 +66,10 @@ export class PageComponent implements AbsComponent {
   
   detectDevice(): void {
     const DEVICE_DSK = 'desktop';
-    //@ts-ignore
-    const userAgentData = bowser.getParser(window.navigator.userAgent).parsedResult;
-    if(userAgentData.platform.type !== DEVICE_DSK) {
+    
+    const bowser = Bowser.getParser(window.navigator.userAgent);
+    const platformType = bowser.getPlatformType();
+    if(platformType !== DEVICE_DSK) {
       (document.querySelector('.unsupported-device-warning') as HTMLElement).classList.remove('hidden');
     }
   }

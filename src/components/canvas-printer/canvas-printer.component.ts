@@ -1,9 +1,11 @@
 import { AbsComponent } from 'abs-component';
 import { DEFAULT_GRADIENT, GRADIENT_CHANGE_EVENT_NAME } from '../../general/consts';
-import { Gradient, ProfilePictureFrame } from '../../general/interfaces';
+import { Gradient, GradientChangeEvent, ProfilePictureFrame } from '../../general/interfaces';
 import { drawFrame } from '../../general/utils';
 import { proportionalRange } from 'abs-utilities';
 import { GradientGeneratorComponent } from '../gradient-generator/gradient-generator.component';
+import { absComponentManager } from '../../main';
+
 
 export class CanvasPrinterComponent implements AbsComponent {
   constructor(public readonly node: HTMLElement) {}
@@ -125,10 +127,13 @@ export class CanvasPrinterComponent implements AbsComponent {
 
     // GradientGenerator logic
     document.addEventListener(GRADIENT_CHANGE_EVENT_NAME, (event: Event) => {
-      //@ts-ignore
-      _profilePictureFrameData = event.detail.profilePictureData as ProfilePictureFrame;
+      const customEvent = event as CustomEvent<GradientChangeEvent>;
+      this._profilePictureFrameData = customEvent.detail.profilePictureData as ProfilePictureFrame;
       this.printToCanvas(this._profilePictureFrameData);
     });
-    GradientGeneratorComponent.prototype.init(); //FIXME this might not work correctly because of `prototype`
+
+    const gradientComponentNode = document.querySelector(`[${absComponentManager.nodeAttributeSelector}="${GradientGeneratorComponent.name}"]`) as HTMLElement;
+    const GradientComponent = absComponentManager.getComponentByNode(gradientComponentNode) as GradientGeneratorComponent;
+    GradientComponent.customInit();
   }
 }
