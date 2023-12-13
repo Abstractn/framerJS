@@ -1,0 +1,87 @@
+.font {
+  // --- SIZES
+  &.size-h1 {
+    font-size: 3rem;
+    letter-spacing: 3px;
+
+    @include breakpoint(tab-down) {
+      font-size: 2.6rem;
+    }
+
+    @include breakpoint(mob-down) {
+      font-size: 2.2rem;
+    }
+  }
+  
+  &.size-h2 {
+    font-size: 2.5rem;
+  }
+  
+  &.size-h3 {
+    font-size: 2rem;
+  }
+  
+  &.size-h4 {
+    font-size: 1.72rem;
+  }
+  
+  &.size-h5 {
+    font-size: 1.44rem;
+
+    /* @include breakpoint(tab-down) {
+      font-size: 1rem;
+    }
+
+    @include breakpoint(mob-down) {
+      font-size: 1rem;
+    } */
+  }
+  
+  &.size-h6 {
+    font-size: 1.2rem;
+  }
+  
+  &.size-p {
+    font-size: 1rem;
+  }
+
+  // --- WEIGHTS
+  &.weight {
+    &-normal {
+      font-weight: 400;
+    }
+
+    &-bold {
+      font-weight: 700;
+    }
+  }
+  
+  // --- TYPES
+  &.type {
+    &-signature {
+      font-family: 'Rounded Elegance';
+    }
+    
+    &-standard {
+      font-family: Futura, Verdana, sans-serif;
+    }
+  }
+
+  //--- SHADOWS
+  &.shadow {
+    &-soft {
+      text-shadow: 0px 0px 3px black;
+    }
+  }
+
+  //--- COLORS
+  .color {
+    &-white {
+      color: white;
+    }
+
+    &-black {
+      color: black;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--header-height);
+  padding-left: var(--page-spacing);
+  padding-right: var(--page-spacing);
+
+  .header-left,
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-left {
+    @include breakpoint(mob-down) {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .header-right {
+    @include breakpoint(mob-down) {
+      display: none;
+    }
+  }
+
+  .header-links {
+    display: flex;
+    gap: 15px;
+    margin-left: 40px;
+  }
+}

@@ -1,14 +1,29 @@
+:root {
+  --bp-mob-down: 600px;
+  --bp-mob-up:   calc(var(--bp-mob-down) + 1px);
+  --bp-tab-down: 1000px;
+  --bp-tab-up:   calc(var(--bp-tab-down) + 1px);
+  --bp-dsk-down: 1200px;
+  --bp-dsk-up:   1920px;
+}
+
+$bp-mob-down: 600px;
+$bp-mob-up:   calc(#{$bp-mob-down} + 1px);
+$bp-tab-down: 1000px;
+$bp-tab-up:   calc(#{$bp-tab-down} + 1px);
+$bp-dsk-down: 1200px;
+$bp-dsk-up:   1920px;
+
 // src:https://codepen.io/robdongas/pen/XmJbYE
 $breakpoints: (
-  'mob': ( max-width: 767px ), //TODO delete after checking code
-  
-  'mob-down': ( max-width: 600px ),
-  'mob-up':   ( min-width: 999px ),
-  'tab-down': ( max-width: 1000px ),
-  'tab-up':   ( min-width: 1199px ),
-  'dsk-down': ( max-width: 1200px ),
-  'dsk-up':   ( min-width: 1200px )
+  'mob-down': ( max-width: $bp-mob-down ),
+  'mob-up':   ( min-width: $bp-mob-up ),
+  'tab-down': ( max-width: $bp-tab-down ),
+  'tab-up':   ( min-width: $bp-tab-up ),
+  'dsk-down': ( max-width: $bp-dsk-down ),
+  'dsk-up':   ( min-width: $bp-dsk-up )
 );
+
 @mixin breakpoint($name) {
   @if map-has-key($breakpoints, $name) {
     @media #{inspect(map-get($breakpoints, $name))} {

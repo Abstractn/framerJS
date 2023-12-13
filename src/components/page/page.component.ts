@@ -1,5 +1,4 @@
 import { AbsComponent } from 'abs-component';
-import Bowser from 'bowser';
 
 export class PageComponent implements AbsComponent {
   constructor(public readonly node: HTMLElement) {}
@@ -17,60 +16,5 @@ export class PageComponent implements AbsComponent {
 
   init() {}
 
-  ready() {
-    this.detectDevice();
-    this.checkforSplashInit();
-    this.addEventsToSplashButtons();
-  }
-
-  addEventsToSplashButtons(): void {
-    const splashNode = document.querySelector(this.SPLASH_SCREEN_NODE_SELECTOR) as HTMLElement;
-    const startButtonNode = splashNode.querySelector(this.START_BUTTON_SELECTOR) as HTMLElement;
-    const guideButtonNode = splashNode.querySelector(this.GUIDE_BUTTON_SELECTOR) as HTMLElement;
-    startButtonNode?.addEventListener('click', () => { this.hideSplashScreen(); });
-    guideButtonNode?.addEventListener('click', () => { this.showGuideView(); });
-  }
-  
-  hideSplashScreen(): void {
-    const splashNode = document.querySelector(this.SPLASH_SCREEN_NODE_SELECTOR) as HTMLElement;
-    splashNode.classList.add(this.SPLASH_SCREEN_CLOSED_CLASS);
-    sessionStorage.setItem(
-      this.SPLASH_SCREEN_VIEWED_STORAGE_KEY,
-      this.SPLASH_SCREEN_VIEWED_VALUE.toString()
-    );
-  }
-  
-  forceHideSplashScreen(): void {
-    const splashNode = document.querySelector(this.SPLASH_SCREEN_NODE_SELECTOR) as HTMLElement;
-    splashNode.classList.add(this.SPLASH_SCREEN_HIDDEN_CLASS);
-  }
-  
-  showGuideView(): void {
-    const splashNode = document.querySelector(this.SPLASH_SCREEN_NODE_SELECTOR) as HTMLElement;
-    const guideViewNode = splashNode.querySelector(this.GUIDE_VIEW_NODE_SELECTOR) as HTMLElement;
-    guideViewNode.classList.add(this.GUIDE_VIEW_VISIBLE_CLASS);
-  }
-  
-  hideGuideView(): void {
-    const splashNode = document.querySelector(this.SPLASH_SCREEN_NODE_SELECTOR) as HTMLElement;
-    const guideViewNode = splashNode.querySelector(this.GUIDE_VIEW_NODE_SELECTOR) as HTMLElement;
-    guideViewNode.classList.remove(this.GUIDE_VIEW_VISIBLE_CLASS);
-  }
-  
-  checkforSplashInit(): void {
-    const isSessionInited: boolean = sessionStorage.getItem(this.SPLASH_SCREEN_VIEWED_STORAGE_KEY) === 'true';
-    if(isSessionInited === this.SPLASH_SCREEN_VIEWED_VALUE)  {
-      this.forceHideSplashScreen();
-    }
-  }
-  
-  detectDevice(): void {
-    const DEVICE_DSK = 'desktop';
-    
-    const bowser = Bowser.getParser(window.navigator.userAgent);
-    const platformType = bowser.getPlatformType();
-    if(platformType !== DEVICE_DSK) {
-      (document.querySelector('.unsupported-device-warning') as HTMLElement).classList.remove('hidden');
-    }
-  }
+  ready() {}
 }

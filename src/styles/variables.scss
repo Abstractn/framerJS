@@ -1,8 +1,13 @@
 :root {
-  --bp-mob-down: 600px;
-  --bp-mob-up:   999px;
-  --bp-tab-down: 1000px;
-  --bp-tab-up:   1199px;
-  --bp-dsk-down: 1200px;
-  --bp-dsk-up:   1200px;
+  --header-height: 80px;
+  --page-spacing: 60px;
+  --icon-size: 24px;
+
+  @include breakpoint(tab-down) {
+    --page-spacing: 30px;
+  }
+
+  @include breakpoint(mob-down) {
+    --page-spacing: 20px;
+  }
 }
