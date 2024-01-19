@@ -294,8 +294,8 @@ export class GradientGeneratorComponent implements AbsComponent {
     });
     const gradientAngleInputNode = this.node.querySelector(this.GRADIENT_ANGLE_INPUT_SELECTOR) as HTMLInputElement;
     const frameSizeInputNode = this.node.querySelector(this.FRAME_SIZE_INPUT_SELECTOR) as HTMLInputElement;
-    frameSizeInputNode.value = (importedGradient.size || 10).toString();
-    gradientAngleInputNode.value = (importedGradient.gradient?.angle || 45).toString();
+    frameSizeInputNode.value = (typeof importedGradient.size === 'number' ? importedGradient.size : 10).toString();
+    gradientAngleInputNode.value = (typeof importedGradient.gradient?.angle === 'number' ? importedGradient.gradient?.angle : 45).toString();
     importInputNode.value = '';
     this.sortSteps();
     this.updateOutput();
