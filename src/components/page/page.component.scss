@@ -1,3 +1,14 @@
 [data-abs-component="PageComponent"] {
-  
+  position: relative;
+
+  padding-left: var(--page-spacing);
+  padding-right: var(--page-spacing);
+
+  #main-body {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

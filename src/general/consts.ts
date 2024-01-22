@@ -1,12 +1,21 @@
-import { ProfilePictureFrame, Step } from "./interfaces";
+import { Gradient, ProfilePictureFrame, Step } from "./interfaces";
 
-export const PROFILE_PICTURE_FRAME_INTERFACE_INIT: ProfilePictureFrame = {
+export const DEFAULT_FRAME_SIZE: number = 10;
+export const DEFAULT_FRAME_ANGLE: number = 45;
+export const DEFAULT_FRAME_GRADIENT_STEPS: Step[] = [
+  { colorCode: '000000', position: 0 },
+  { colorCode: 'FFFFFF', position: 100 },
+];
+export const DEFAULT_FRAME_GRADIENT: Gradient = {
+  steps: DEFAULT_FRAME_GRADIENT_STEPS,
+  angle: DEFAULT_FRAME_ANGLE,
+};
+export const DEFAULT_FRAME: ProfilePictureFrame = {
+  size: DEFAULT_FRAME_SIZE,
+  gradient: DEFAULT_FRAME_GRADIENT,
+};
+export const INIT_FRAME: ProfilePictureFrame = {
   gradient: {
     steps: []
   }
 };
-export const DEFAULT_GRADIENT: Step[] = [
-  {colorCode: '000000', position: 0},
-  {colorCode: 'FFFFFF', position: 100}
-];
-export const GRADIENT_CHANGE_EVENT_NAME: string = 'gradientchange';

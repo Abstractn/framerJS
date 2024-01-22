@@ -36,7 +36,28 @@
       </div>
     </header>
     <main data-abs-component="PageComponent">
-      
+      <div data-abs-component="DynamicBackgroundComponent">
+        <div class="background-overlay"></div>
+        <div class="background-1"></div>
+        <div class="background-2"></div>
+      </div>
+      <div id="main-body">
+        <div data-abs-component="ImageViewerComponent">
+          <div class="image-container checkboard-background-light">
+          </div>
+          <div class="buttons-container mt-16">
+            <button class="image-load">LOAD</button>
+            <!-- TODO delete? -->
+            <!-- <button class="image-change hidden">CHANGE</button> -->
+            <button class="image-download" disabled="true">DOWNLOAD</button>
+          </div>
+          <input type="file" class="image-file-input hidden">
+          <!-- TODO delete -->
+          <!-- <img src="" class="image-file-input-preview hidden"> -->
+        </div>
+        <!-- TODO -->
+
+      </div>
     </main>
     <footer>
       <span class="font size-p">by Abstractn</span>

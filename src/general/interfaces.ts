@@ -14,7 +14,3 @@ export interface ProfilePictureFrame {
   color?: string;
   gradient?: Gradient;
 }
-
-export interface GradientChangeEvent {
-  profilePictureData: ProfilePictureFrame;
-}

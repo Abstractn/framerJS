@@ -1,6 +1,6 @@
 import { AbsComponent } from 'abs-component';
-import { DEFAULT_GRADIENT, GRADIENT_CHANGE_EVENT_NAME, PROFILE_PICTURE_FRAME_INTERFACE_INIT } from '../../general/consts';
-import { Gradient, GradientChangeEvent, ProfilePictureFrame, Step } from '../../general/interfaces';
+import { } from '../../general/consts';
+import { Gradient, ProfilePictureFrame, Step } from '../../general/interfaces';
 
 export class GradientGeneratorComponent implements AbsComponent {
   constructor(public readonly node: HTMLElement) {}
@@ -30,13 +30,16 @@ export class GradientGeneratorComponent implements AbsComponent {
   private readonly STEP_MAX_VALUE: number = 100;
   //TODO move to config object
   private readonly LAST_GRADIENT_DATA_STORAGE_KEY: string = 'abs.framerJs.gradientGenerator.lastGeneratedData';
-  private readonly GRADIENT_CHANGE_EVENT_NAME: string = GRADIENT_CHANGE_EVENT_NAME;
+  // TODO delete
+  //private readonly GRADIENT_CHANGE_EVENT_NAME: string = GRADIENT_CHANGE_EVENT_NAME;
 
   private isComponentInited: boolean = false;
   private stepTemplateNode: HTMLElement | null = null;
   private templateSteps: NodeListOf<HTMLElement> | [] = [];
-  private output: ProfilePictureFrame = PROFILE_PICTURE_FRAME_INTERFACE_INIT;
-  private onChange = new CustomEvent(this.GRADIENT_CHANGE_EVENT_NAME, {});
+  // TODO delete
+  //private output: ProfilePictureFrame = PROFILE_PICTURE_FRAME_INTERFACE_INIT;
+  // TODO delete
+  //private onChange = new CustomEvent(this.GRADIENT_CHANGE_EVENT_NAME, {});
 
   init() {}
 
