@@ -47,15 +47,59 @@
           </div>
           <div class="buttons-container mt-16">
             <button class="image-load">LOAD</button>
-            <!-- TODO delete? -->
-            <!-- <button class="image-change hidden">CHANGE</button> -->
             <button class="image-download" disabled="true">DOWNLOAD</button>
           </div>
           <input type="file" class="image-file-input hidden">
-          <!-- TODO delete -->
-          <!-- <img src="" class="image-file-input-preview hidden"> -->
+          <a href="#" class="image-download-link hidden"></a>
         </div>
-        <!-- TODO -->
+        <div data-abs-component="GradientGeneratorComponent" class="gradient-generator disabled">
+          <div class="gradient-generator-header">
+            <div class="gradient-generator-header-title">Gradient generator</div>
+            <div class="gradient-generator-header-buttons">
+              <button class="gradient-generator-control gradient-generator-control-import square-button" title="import">
+                <i class="fa-icon fa-solid fa-file-import"></i>
+              </button>
+              <button class="gradient-generator-control gradient-generator-control-export square-button" title="export">
+                <i class="fa-icon fa-solid fa-floppy-disk"></i>
+              </button>
+            </div>
+          </div>
+          <hr class="hr-mid">
+          <div class="gradient-generator-body">
+            <div class="gradient-generator-form">
+              <div class="gradient-generator-frame-options">
+                <div class="gradient-generator-frame-size" title="frame size">
+                  <span class="gradient-generator-frame-size-title">size</span>
+                  <input type="number" class="gradient-generator-frame-size-input" min="0" max="100" value="10">
+                </div>
+                <div class="gradient-generator-frame-angle" title="gradient angle">
+                  <span class="gradient-generator-frame-angle-title">angle</span>
+                  <input type="number" class="gradient-generator-frame-angle-input" min="-360" max="360" value="15">°
+                </div>
+              </div>
+              <ul class="gradient-generator-step-list gradient-generator-scroll"></ul>
+              <button class="gradient-generator-control gradient-generator-control-add square-button" title="add step">+</button>
+            </div>
+            <div class="gradient-generator-view gradient-generator-view-import not-visible glass">
+              <div class="gradient-generator-view-header">
+                <button class="gradient-generator-view-close gradient-generator-view-import-close square-button">
+                  <i class="fa-icon fa-solid fa-x"></i>
+                </button>
+                <button class="gradient-generator-view-title gradient-generator-view-import-action square-button">import</button>
+              </div>
+              <textarea class="gradient-generator-view-input gradient-generator-view-import-input" placeholder="insert code here"></textarea>
+            </div>
+            <div class="gradient-generator-view gradient-generator-view-export not-visible glass">
+              <div class="gradient-generator-view-header">
+                <button class="gradient-generator-view-close gradient-generator-view-export-close square-button">
+                  <i class="fa-icon fa-solid fa-x"></i>
+                </button>
+                <span class="gradient-generator-view-title gradient-generator-view-export-title">export</span>
+              </div>
+              <textarea class="gradient-generator-view-input gradient-generator-view-export-input"></textarea>
+            </div>
+          </div>
+        </div>
 
       </div>
     </main>

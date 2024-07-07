@@ -1,6 +1,5 @@
 [data-abs-component="PageComponent"] {
   position: relative;
-
   padding-left: var(--page-spacing);
   padding-right: var(--page-spacing);
 
@@ -10,5 +9,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 60px;
+
+    @include breakpoint(tab-down) {
+      --image-size: 275px;
+      gap: 30px;
+    }
+
+    @include breakpoint(mob-down) {
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 60px;
+    }
   }
 }

@@ -1,8 +1,8 @@
 [data-abs-component="ImageViewerComponent"] {
-  --image-size: 525px;
+  --image-size: 500px;
   
   @include breakpoint(tab-down) {
-    --image-size: 450px;
+    --image-size: 275px;
   }
 
   @include breakpoint(mob-down) {
@@ -35,9 +35,19 @@
       height: 50px;
       color: white;
       background: transparent;
+      //TODO color variable
       border: solid white 2px;
       border-radius: 8px;
       cursor: pointer;
+
+      &:disabled {
+        //TODO color variable
+        color: darkgray;
+        //TODO color variable
+        border-color: darkgray;
+        cursor: default;
+        pointer-events: none;
+      }
     }
   }
 }

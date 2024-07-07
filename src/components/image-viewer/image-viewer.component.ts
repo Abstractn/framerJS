@@ -3,39 +3,38 @@ import { DEFAULT_FRAME, DEFAULT_FRAME_GRADIENT, DEFAULT_FRAME_SIZE } from '../..
 import { Gradient, ProfilePictureFrame } from '../../general/interfaces';
 import { degreesToRadians } from '../../general/utils';
 import { proportionalRange } from 'abs-utilities';
-import { GradientGeneratorComponent } from '../gradient-generator/gradient-generator.component';
-import { absComponentManager } from '../../main';
-import { activeFrame } from '../../general/observables';
+import { activeFrame, imageLoaded } from '../../general/observables';
 import { Subscription, skip } from 'rxjs';
 
 export class ImageViewerComponent implements AbsComponent {
   constructor(public readonly node: HTMLElement) {
     this.loadButtonNode = this.node.querySelector(this.LOAD_BUTTON_NODE_SELECTOR) as HTMLButtonElement;
-    //TODO delete?
-    //this.changeButtonNode = this.node.querySelector(this.CHANGE_BUTTON_NODE_SELECTOR) as HTMLButtonElement;
     this.downloadButtonNode = this.node.querySelector(this.DOWNLOAD_BUTTON_NODE_SELECTOR) as HTMLButtonElement;
     this.imageInputNode = this.node.querySelector(this.IMAGE_INPUT_NODE_SELECTOR) as HTMLInputElement;
     this.canvasWrapperNode = this.node.querySelector(this.CANVAS_WRAPPER_NODE_SELECTOR) as HTMLElement;
+    this.imageDownloadLinkNode = this.node.querySelector(this.IMAGE_DOWNLOAD_LINK_NODE_SELECTOR) as HTMLAnchorElement;
     this.canvasNode = null;
     this.activeFrameSubscription = null;
+    this.lastFrame = null;
   }
 
   private readonly LOAD_BUTTON_NODE_SELECTOR: string = 'button.image-load';
-  //TODO delete?
-  //private readonly CHANGE_BUTTON_NODE_SELECTOR: string = 'button.image-change';
   private readonly DOWNLOAD_BUTTON_NODE_SELECTOR: string = 'button.image-download';
   private readonly IMAGE_INPUT_NODE_SELECTOR: string = 'input.image-file-input';
   private readonly CANVAS_WRAPPER_NODE_SELECTOR: string = '.image-container';
+  private readonly IMAGE_DOWNLOAD_LINK_NODE_SELECTOR: string = 'a.image-download-link';
   private readonly loadButtonNode: HTMLButtonElement;
-  //TODO delete?
-  //private readonly changeButtonNode: HTMLButtonElement;
   private readonly downloadButtonNode: HTMLButtonElement;
   private readonly imageInputNode: HTMLInputElement;
   private readonly canvasWrapperNode: HTMLElement;
+  private readonly imageDownloadLinkNode: HTMLAnchorElement;
   private canvasNode: HTMLCanvasElement|null;
   private activeFrameSubscription: Subscription|null;
+  private lastFrame: ProfilePictureFrame|null;
 
-  init() {}
+  init() {
+    this.downloadButtonNode.setAttribute('disabled', 'true');
+  }
 
   ready() {
     this.setNodesEvents();
@@ -53,7 +52,6 @@ export class ImageViewerComponent implements AbsComponent {
   }
 
   generateCanvasNode(image: HTMLImageElement) {
-    //TODO cropping
     const canvasSize = image.width < image.height ? image.width : image.height;
     this.canvasWrapperNode.innerHTML = '';
     this.canvasNode = document.createElement('canvas');
@@ -63,6 +61,7 @@ export class ImageViewerComponent implements AbsComponent {
 
     this.activeFrameSubscription && this.activeFrameSubscription.unsubscribe();
     this.activeFrameSubscription = activeFrame.pipe(skip(1)).subscribe(updatedFrame => {
+      this.lastFrame = updatedFrame;
       this.printToCanvas(image, updatedFrame);
     });
   }
@@ -85,19 +84,13 @@ export class ImageViewerComponent implements AbsComponent {
     };
 
     const drawImage = () => {
-      //TODO make dynamic
+      //TODO make dynamic as "preserve image" option
       const OFFSET = true;
       
-      //const widthDifference = canvasSize - imageWidth; //TODO delete?
-      //const heightDifference = canvasSize - imageHeight; //TODO delete?
-
       const sourceX = 0;
       const sourceY = 0;
       const sourceWidth = imageWidth;
       const sourceHeight = imageHeight;
-      //TODO delete?
-      //const destinationX = OFFSET ? frameSize : widthDifference / 2;
-      //const destinationY = OFFSET ? frameSize : heightDifference / 2;
       const destinationX = OFFSET ? frameSize : 0;
       const destinationY = OFFSET ? frameSize : 0;
       const destinationWidth = OFFSET ? imageWidth - (frameSize * 2) : imageWidth;
@@ -176,28 +169,33 @@ export class ImageViewerComponent implements AbsComponent {
     this.loadButtonNode.addEventListener('click', (event) => {
       this.imageInputNode.click();
     });
-    
-    //TODO delete?
-    //this.changeButtonNode.addEventListener('click', (event) => {});
-    
-    this.downloadButtonNode.addEventListener('click', (event) => {});
+
+    this.downloadButtonNode.addEventListener('click', (event) => {
+      const getFileOriginalName = () => {
+        const fakeFilePath = this.imageInputNode.value;
+        const splitFakeFilePath = fakeFilePath.split('\\');
+        const fileNameAndFormat = splitFakeFilePath[splitFakeFilePath.length - 1];
+        const splitFileNameAndFormat = fileNameAndFormat.split('.');
+        const fileName = splitFileNameAndFormat[0];
+        return fileName;
+      };
+
+      const image = this.canvasNode?.toDataURL() as string;
+      const originalFileName = getFileOriginalName();
+      this.imageDownloadLinkNode.download = `${originalFileName}.png`;
+      this.imageDownloadLinkNode.href = image;
+      this.imageDownloadLinkNode.click();
+    });
     
     this.imageInputNode.addEventListener('change', (event) => {
       this.getImageAsEncodedString(encodedImageString => {
         const imageElement = new Image();
         imageElement.src = encodedImageString;
         imageElement.onload = () => {
-          //TODO move inside next methods
-          /* const imageData = {
-            imageElement: imageElement,
-            imageWidth: imageElement.width,
-            imageHeight: imageElement.height,
-          }; */
-
           this.generateCanvasNode(imageElement);
-          //TODO add usage of last stored frame
-          // if there is no stored frame use `DEFAULT_FRAME`
-          this.printToCanvas(imageElement, DEFAULT_FRAME);
+          this.printToCanvas(imageElement, this.lastFrame || DEFAULT_FRAME);
+          imageLoaded.next(null);
+          this.downloadButtonNode.removeAttribute('disabled');
         };
       });
     });
