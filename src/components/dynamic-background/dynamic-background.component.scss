@@ -1,13 +1,14 @@
 [data-abs-component="DynamicBackgroundComponent"] {
-  --gradient-background-darkness: 0.7;
+  --gradient-background-darkness: 0.3;
 
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 100%; //BUG on mobile
   top: 0;
   left: 0;
+  opacity: var(--gradient-background-darkness);
   z-index: 0;
-  display: none; //TODO delete when component logic is ready
+  display: none !important; //TODO delete after bugless
 
   .background-overlay,
   .background-1,
@@ -28,27 +29,17 @@
     );
   }
 
+  .background-1,
+  .background-2 {
+    opacity: 0;
+    transition: opacity 1.2s;
+  }
+
   .background-1 {
     z-index: 0;
-    opacity: 0; //TODO animate
-
-    //MOCK test
-    background: linear-gradient(
-      123deg,
-      #225F33,
-      #45CA62,
-    );
   }
 
   .background-2 {
     z-index: 1;
-    opacity: 0; //TODO animate
-
-    //MOCK test
-    background: linear-gradient(
-      123deg,
-      #225F33,
-      #45CA62,
-    );
   }
 }
