@@ -4,7 +4,7 @@ import { Gradient, ProfilePictureFrame } from '../../general/interfaces';
 import { degreesToRadians } from '../../general/utils';
 import { proportionalRange } from 'abs-utilities';
 import { activeFrame, imageLoaded } from '../../general/observables';
-import { Subscription, skip } from 'rxjs';
+import { Subscription, debounceTime, skip } from 'rxjs';
 
 export class ImageViewerComponent implements AbsComponent {
   constructor(public readonly node: HTMLElement) {
@@ -60,7 +60,7 @@ export class ImageViewerComponent implements AbsComponent {
     this.canvasWrapperNode.appendChild(this.canvasNode);
 
     this.activeFrameSubscription && this.activeFrameSubscription.unsubscribe();
-    this.activeFrameSubscription = activeFrame.pipe(skip(1)).subscribe(updatedFrame => {
+    this.activeFrameSubscription = activeFrame.pipe(skip(1), debounceTime(0)).subscribe(updatedFrame => {
       this.lastFrame = updatedFrame;
       this.printToCanvas(image, updatedFrame);
     });
